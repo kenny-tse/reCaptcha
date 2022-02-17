@@ -15,13 +15,17 @@ app.get("/", (req, res) => {
 
 app.post("/verify", (req, res) => {
 
+  const serverKey = process.env.SERVER_API_KEY;
+  const reponse = req.body["g-recaptcha-response"];
+  const url = "https://www.google.com/recaptcha/api/siteverify"
+
   axios({
     method: 'post',
-    url: `https://www.google.com/recaptcha/api/siteverify?secret=${process.env.SERVER_API_KEY}&response=${req.body["g-recaptcha-response"]}`,
+    url: `${url}?secret=${serverKey}&response=${reponse}`
   })
     .then((result) => {
 
-      let templateVars = { botResult: JSON.stringify(result.data) };
+      const templateVars = { botResult: JSON.stringify(result.data) };
 
       if (result.data.score < threshold) {
         templateVars["isBot"] = true;
