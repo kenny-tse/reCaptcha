@@ -33,11 +33,17 @@ app.post("/verify", (req, res) => {
         templateVars["isBot"] = false;
         res.render("results", templateVars);
       }
+
+      if (result.data.success === false) {
+        res.send(`Authentication unsuccessful: ${JSON.stringify(result.data)}`)
+      }
+
     })
     .catch((e) => {
-
+      res.send(`An error has occurred ${e}`)
       console.log(e);
     })
+
 });
 
 app.listen(process.env.PORT || port, () => {
