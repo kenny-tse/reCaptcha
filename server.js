@@ -8,6 +8,8 @@ app.set("view engine", "ejs");
 const environment = require("dotenv").config();
 const axios = require('axios');
 
+const threshold = 0.5;
+
 app.get("/", (req, res) => {
   res.render("main", { API_KEY: process.env.CLIENT_API_KEY });
 });
@@ -22,12 +24,12 @@ app.post("/verify", (req, res) => {
 
       let templateVars = { botResult: JSON.stringify(result.data) };
 
-      if (result.data.success === false) {
+      if (result.data.score < threshold) {
         templateVars["isBot"] = ""
         res.render("results", templateVars);
       };
 
-      if (result.data.success === true) {
+      if (result.data.success >= threshold) {
         templateVars["isBot"] = "NOT"
         res.render("results", templateVars);
       };
