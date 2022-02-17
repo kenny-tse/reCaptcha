@@ -1,12 +1,12 @@
 const express = require("express");
+const environment = require("dotenv").config();
+const axios = require('axios');
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("views"));
-const port = 4004;
 app.set("view engine", "ejs");
-const environment = require("dotenv").config();
-const axios = require('axios');
+const port = 4004;
 
 const threshold = 0.5;
 
