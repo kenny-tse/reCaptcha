@@ -1,0 +1,12 @@
+body{
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.g-recaptcha{
+  width: 150px;
+  height: 100px;
+  margin-top: 5%;
+}
