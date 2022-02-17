@@ -12,11 +12,15 @@
 <body>
 
   <div class="results">
-    <div>you are <%= isBot %> a bot!!!</div>
-    <div>Here is some information..</div>
-    <div>
-      <%= botResult %>
-    </div>
+    <% if(true){ %>
+      <div class="response">You are not a bot!!!</div>
+      <% } else{ %>
+        <div class="response">You are not a bot!!!</div>
+        <% } %>
+          <div>Here is some information..</div>
+          <div>
+            <%= botResult %>
+          </div>
   </div>
 </body>
 

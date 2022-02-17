@@ -25,12 +25,12 @@ app.post("/verify", (req, res) => {
       let templateVars = { botResult: JSON.stringify(result.data) };
 
       if (result.data.score < threshold) {
-        templateVars["isBot"] = ""
+        templateVars["isBot"] = true;
         res.render("results", templateVars);
       }
 
-      if (result.data.success >= threshold) {
-        templateVars["isBot"] = "not"
+      if (result.data.score >= threshold) {
+        templateVars["isBot"] = false;
         res.render("results", templateVars);
       }
     })
