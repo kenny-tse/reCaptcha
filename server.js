@@ -37,6 +37,6 @@ app.post("/verify", (req, res) => {
     })
 });
 
-app.listen(prcoess.env.PORT || port, () => {
+app.listen(process.env.PORT || port, () => {
   console.log(`I'll see if you're a bot! ${port}`);
 });
