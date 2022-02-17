@@ -7,7 +7,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static("views"));
 app.set("view engine", "ejs");
 const port = 4004;
-
 const threshold = 0.5;
 
 app.get("/", (req, res) => {
@@ -40,10 +39,9 @@ app.post("/verify", (req, res) => {
 
     })
     .catch((e) => {
-      res.send(`An error has occurred ${e}`)
+      res.send(`An error has occurred ${e}`);
       console.log(e);
     })
-
 });
 
 app.listen(process.env.PORT || port, () => {
