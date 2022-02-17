@@ -27,14 +27,15 @@ app.post("/verify", (req, res) => {
       if (result.data.score < threshold) {
         templateVars["isBot"] = ""
         res.render("results", templateVars);
-      };
+      }
 
       if (result.data.success >= threshold) {
         templateVars["isBot"] = "NOT"
         res.render("results", templateVars);
-      };
+      }
     })
     .catch((e) => {
+      res.send("An Error has occurred", e)
       console.log(e);
     })
 });
