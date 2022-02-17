@@ -30,12 +30,12 @@ app.post("/verify", (req, res) => {
       }
 
       if (result.data.success >= threshold) {
-        templateVars["isBot"] = "NOT"
+        templateVars["isBot"] = "not"
         res.render("results", templateVars);
       }
     })
     .catch((e) => {
-      res.send("An Error has occurred", e)
+
       console.log(e);
     })
 });
