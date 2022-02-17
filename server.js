@@ -6,14 +6,35 @@ app.use(express.static("views"));
 const port = 4004;
 app.set("view engine", "ejs");
 const environment = require("dotenv").config();
+const axios = require('axios');
 
 app.get("/", (req, res) => {
   res.render("main", { API_KEY: process.env.CLIENT_API_KEY });
 });
 
 app.post("/verify", (req, res) => {
-  console.log(req.body)
-  res.render("results");
+
+  axios({
+    method: 'post',
+    url: `https://www.google.com/recaptcha/api/siteverify?secret=${process.env.SERVER_API_KEY}&response=${req.body["g-recaptcha-response"]}`,
+  })
+    .then((result) => {
+
+      let templateVars = { botResult: JSON.stringify(result.data) };
+
+      if (result.data.success === false) {
+        templateVars["isBot"] = ""
+        res.render("results", templateVars);
+      };
+
+      if (result.data.success === true) {
+        templateVars["isBot"] = "NOT"
+        res.render("results", templateVars);
+      };
+    })
+    .catch((e) => {
+      console.log(e);
+    })
 });
 
 app.listen(port, () => {
